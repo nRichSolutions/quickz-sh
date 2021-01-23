@@ -74,6 +74,7 @@ POWERLEVEL9K_PROMPT_ON_NEWLINE=true
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+    sudo
     git
     zsh-completions
     zsh-autosuggestions
@@ -154,6 +155,7 @@ alias myip="wget -qO- https://wtfismyip.com/text"	# quickly show external ip add
 alias l="ls -lah"
 alias x="exit"
 alias k="k -h"						# show human readable filesizes, in kb, mb etc
+alias zshconfig="vim ~/.zshrc"
 
 
 # CUSTOM FUNCTIONS
@@ -170,27 +172,8 @@ cheat() {
     fi
 }
 
-# Matrix screen saver! will run if you have installed "cmatrix"
-# TMOUT=900
-# TRAPALRM() { if command -v cmatrix &> /dev/null; then cmatrix -sb; fi }
-
 speedtest() {
     curl -s https://raw.githubusercontent.com/sivel/speedtest-cli/master/speedtest.py | python3 -
-}
-
-dadjoke() {
-    curl https://icanhazdadjoke.com
-}
-
-# Find dictionary definition
-dict() {
-    if [ "$3" ]; then
-        curl "dict://dict.org/d:$1 $2 $3"
-    elif [ "$2" ]; then
-        curl "dict://dict.org/d:$1 $2"
-    else
-        curl "dict://dict.org/d:$1"
-    fi
 }
 
 # Find geo info from IP
@@ -200,15 +183,5 @@ ipgeo() {
         curl "http://api.db-ip.com/v2/free/$1"
     else
         curl "http://api.db-ip.com/v2/free/$(myip)"
-    fi
-}
-
-# Show covid-19 spread stats
-corona() {
-    # Specify country otherwise shows stats for all
-    if [ "$1" ]; then
-        curl "https://corona-stats.online/$1"
-    else
-        curl "https://corona-stats.online"
     fi
 }
